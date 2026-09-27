@@ -1,3 +1,83 @@
-<Solution>
-  <Project Path="Task2-Calculator/Task2-Calculator.csproj" />
-</Solution>
+namespace Task2_Calculator
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void lblAnswer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnResult_Click(object sender, EventArgs e)
+        {
+
+            double numberOne;
+            double numberTwo;
+
+            if (!double.TryParse(txtNumberOne.Text, out numberOne))
+            {
+                MessageBox.Show("Birinci ədəd düzgün daxil edilməyib.");
+
+                return;
+            }
+
+            if (!double.TryParse(txtNumberTwo.Text, out numberTwo))
+            {
+                MessageBox.Show("İkinci ədəd düzgün daxil edilməyib.");
+                return;
+            }
+
+            string command = cmbCommand.Text;
+
+            if (command == "")
+            {
+                MessageBox.Show("Əməliyyat seçin.");
+                return;
+            }
+
+            double answer = 0;
+
+            if (command == "+")
+            {
+                answer = numberOne + numberTwo;
+            }
+            else if (command == "-")
+            {
+                answer = numberOne - numberTwo;
+            }
+            else if (command == "*")
+            {
+                answer = numberOne * numberTwo;
+            }
+            else if (command == "/")
+            {
+                if (numberTwo == 0)
+                {
+                    MessageBox.Show("0-a bölmək olmaz.");
+                    return;
+                }
+
+                answer = numberOne / numberTwo;
+            }
+
+            lblAnswer.Text = answer.ToString();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtNumberOne.Text = "0";
+            txtNumberTwo.Text = "0";
+            cmbCommand.SelectedIndex = -1;
+            lblAnswer.Text = "0";
+        }
+
+        private void cmbCommand_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
